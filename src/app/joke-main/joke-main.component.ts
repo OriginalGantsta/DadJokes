@@ -9,27 +9,19 @@ import { Joke } from '../Model/joke.model';
   templateUrl: './joke-main.component.html',
   styleUrls: ['./joke-main.component.css']
 })
-export class JokeMainComponent implements OnInit {
+export class JokeMainComponent {
 joke: Joke=null;
-favoriteJokes: Joke[]=[];
 
   constructor(private http: HttpClient, private jokeAPI: JokeAPIService, private localStorage: LocalStorageService) { }
 
   getJoke(){
-    this.jokeAPI.fetchJoke().subscribe((j: Joke)=>{console.log(j.joke, j.id); this.joke=j })
+    this.jokeAPI.fetchJoke().subscribe((j: Joke)=>{this.joke=j })
   }
 
   favoriteJoke(){
-    this.favoriteJokes.push(this.joke);
-    this.localStorage.saveFavoriteJokes(this.favoriteJokes);
-    this.localStorage.getJokes().next
+    this.localStorage.saveFavoriteJokes(this.joke);
   }
 
-  ngOnInit(): void {
-    // this.favoriteJokes = this.localStorage.loadFavoriteJokes()
-    this.localStorage.getJokes().subscribe((jokes)=>{
-      this.favoriteJokes = jokes;
-    })
-  }
+
 
 }

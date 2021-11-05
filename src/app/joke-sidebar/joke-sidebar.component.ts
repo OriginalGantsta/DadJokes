@@ -11,10 +11,14 @@ export class JokeSidebarComponent implements OnInit {
 favoriteJokes: Joke[] = [];
   constructor(private localStorage: LocalStorageService) { }
 
+removeFromFavorites(index){
+  this.localStorage.deleteJoke(index)
+};
+
   ngOnInit(): void {
     // this.favoriteJokes = this.localStorage.loadFavoriteJokes()
-    this.localStorage.getJokes().subscribe((jokes)=>{
-      this.favoriteJokes = jokes;
+    this.localStorage.getJokes().subscribe((jokeArray)=>{
+      this.favoriteJokes = jokeArray;
     })
   }
 

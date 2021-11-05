@@ -8,10 +8,17 @@ import { Joke } from './Model/joke.model';
 export class LocalStorageService {
   jokes = new BehaviorSubject<Joke[]>(this.loadFavoriteJokes());
 
+  setAndRefreshJokes(jokeArray: Joke[]){
+    localStorage.setItem("favorite_jokes", JSON.stringify(jokeArray));
+    this.jokes.next(this.loadFavoriteJokes());
+}
   constructor() { }
-  saveFavoriteJokes(jokes: Joke[]){
-    localStorage.setItem("favorite_jokes", JSON.stringify(jokes))
-  }
+
+  saveFavoriteJokes(joke: Joke){
+    var jokeArray: Joke[] = this.loadFavoriteJokes();
+    if(JSON.stringify(jokeArray).search(joke.id) === -1){
+    jokeArray.push(joke);
+    this.setAndRefreshJokes(jokeArray)}}
 
   loadFavoriteJokes(): Joke[] {
     const storage = localStorage.getItem('favorite_jokes');
@@ -20,7 +27,13 @@ export class LocalStorageService {
     }
     return []
   }
-  getJokes(){
+
+  deleteJoke(index: number){
+   var jokeArray: Joke[]= JSON.parse(localStorage.getItem('favorite_jokes'));
+   jokeArray.splice(index, 1);
+   this.setAndRefreshJokes(jokeArray)}
+
+  getJokes(): BehaviorSubject<Joke[]>{
     return this.jokes
   }
 }
