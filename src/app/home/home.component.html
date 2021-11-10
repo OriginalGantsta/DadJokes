@@ -1,0 +1,21 @@
+<div class="flex" style="width: 100%">
+  <div
+    style="overflow: hidden; background-color: 'white'"
+    [ngStyle]="
+      sidebarOpen
+        ? { width: '25vw', transition: '0.5s' }
+        : { width: '0', transition: '0.5s' }
+    "
+  >
+    <div *ngIf="sidebar" style="position: relative; width: 24vw; display: flex">
+      <app-joke-sidebar style="float: left"> </app-joke-sidebar>
+    </div>
+  </div>
+  <div
+    [ngStyle]="
+  sidebarOpen
+    ? { 'max-width': '65vw', 'padding-left': '1em'} : {}"
+  >
+    <app-joke-main></app-joke-main>
+  </div>
+</div>

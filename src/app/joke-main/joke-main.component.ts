@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { JokeAPIService } from '../joke-api.service';
+import { SidebarToggleService } from '../joke-sidebar/sidebar-toggle.service';
 import { LocalStorageService } from '../local-storage.service';
 import { Joke } from '../Model/joke.model';
 
@@ -12,7 +13,7 @@ import { Joke } from '../Model/joke.model';
 export class JokeMainComponent {
 joke: Joke=null;
 
-  constructor(private http: HttpClient, private jokeAPI: JokeAPIService, private localStorage: LocalStorageService) { }
+  constructor(private http: HttpClient, private jokeAPI: JokeAPIService, private localStorage: LocalStorageService, private sidebarToggleService: SidebarToggleService) { }
 
   getJoke(){
     this.jokeAPI.fetchJoke().subscribe((j: Joke)=>{this.joke=j })
@@ -22,6 +23,8 @@ joke: Joke=null;
     this.localStorage.saveFavoriteJokes(this.joke);
   }
 
-
+  onToggleSidebar(){
+    this.sidebarToggleService.onToggleSidebar()
+  }
 
 }
