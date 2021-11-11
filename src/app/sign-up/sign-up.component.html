@@ -1,1 +1,7 @@
-<p>sign-up works!</p>
+<form (ngSubmit)="onSubmit(form)" #form = "ngForm">
+  <input type="text" name="first name" ngModel required>
+  <input type="text" name="last name" ngModel required>
+  <input type="email" name="email" ngModel required email>
+  <input name="password" type="password" ngModel required>
+  <button type="submit">'Submit</button>
+</form>
