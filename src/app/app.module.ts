@@ -29,7 +29,8 @@ const appRoutes: Routes = [
     JokeSidebarComponent,
     JokeMainComponent,
     HeaderComponent,
-    SignUpComponent
+    SignUpComponent,
+    SignInComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

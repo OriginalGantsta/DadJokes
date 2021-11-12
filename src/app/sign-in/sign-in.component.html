@@ -1,1 +1,5 @@
-<p>sign-in works!</p>
+<form (ngSubmit)="onSubmit(signInForm)" #signInForm = "ngForm" >
+  <input type="email" name="email" ngModel required email>
+  <input name="password" type="password" ngModel required>
+  <button type="submit">'Submit</button>
+</form>

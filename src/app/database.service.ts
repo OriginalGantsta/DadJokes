@@ -4,7 +4,7 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Joke } from './Model/joke.model';
 import { User } from './Model/user.model';
-import { UserSignup } from './Model/userSignup.model';
+import { UserSignup } from './Model/userSignUp.model';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +31,15 @@ export class DatabaseService {
       console.log(this.user)
     });
     this.database.object('users/' + this.user.uid).set(this.user);
+  }
+
+  async userLoggedIn(){
+    await this.angularFireAuth.onAuthStateChanged((authUser) => {
+      this.user.uid = authUser.uid;
+      this.user.email = authUser.email;
+      this.jokes = this.database.object('users/' + this.user.uid + '/data' + '/favoriteJokes').valueChanges();
+      console.log(authUser)
+    })
   }
 
   async saveFavoriteJokes(joke: Joke) {

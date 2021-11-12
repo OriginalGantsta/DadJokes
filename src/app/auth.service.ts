@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { DatabaseService } from './database.service';
-import { UserSignup } from './Model/userSignup.model';
+import { UserSignup } from './Model/userSignUp.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +11,7 @@ export class AuthService {
     private angularFireAuth: AngularFireAuth,
     private databaseService: DatabaseService
   ) {}
+
   signUp(userSignup: UserSignup) {
     return this.angularFireAuth
       .createUserWithEmailAndPassword(userSignup.email, userSignup.password)
@@ -23,7 +24,12 @@ export class AuthService {
       });
   }
 
-
-
-
+  signIn(email, password) {
+    this.angularFireAuth
+      .signInWithEmailAndPassword(email, password)
+      .then(()=> this.databaseService.userLoggedIn())
+      .catch((error) => {
+        window.alert(error.message);
+      });
+  }
 }

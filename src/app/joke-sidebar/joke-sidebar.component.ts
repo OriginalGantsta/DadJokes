@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { DatabaseService } from '../database.service';
 import { LocalStorageService } from '../local-storage.service';
 import { Joke } from '../Model/joke.model';
@@ -8,9 +9,11 @@ import { Joke } from '../Model/joke.model';
   templateUrl: './joke-sidebar.component.html',
   styleUrls: ['./joke-sidebar.component.css']
 })
-export class JokeSidebarComponent implements OnInit {
+export class JokeSidebarComponent implements OnInit, OnDestroy {
 favoriteJokes: Joke[] = [];
-  constructor(
+jokesSubscription: Subscription;
+
+constructor(
     private localStorage: LocalStorageService,
     private databaseService: DatabaseService) { }
 
@@ -22,13 +25,14 @@ removeFromFavorites(index){
     // this.localStorage.getJokes().subscribe((jokeArray)=>{
     //   this.favoriteJokes = jokeArray;
     // })
-    this.databaseService.jokes.subscribe(data => {
+   this.jokesSubscription =  this.databaseService.jokes.subscribe(data => {
       for (let key in data){
-        console.log(data);
-        console.log (key);
-        console.log(data['key']);
-        this.favoriteJokes.push(data['key'])
+        this.favoriteJokes.push(data[key])
       }})
+  }
+
+  ngOnDestroy(){
+    this.jokesSubscription.unsubscribe()
   }
 
 }
