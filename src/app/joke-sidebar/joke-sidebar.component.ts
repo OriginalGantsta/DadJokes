@@ -7,32 +7,24 @@ import { Joke } from '../Model/joke.model';
 @Component({
   selector: 'app-joke-sidebar',
   templateUrl: './joke-sidebar.component.html',
-  styleUrls: ['./joke-sidebar.component.css']
+  styleUrls: ['./joke-sidebar.component.css'],
 })
 export class JokeSidebarComponent implements OnInit, OnDestroy {
-favoriteJokes: Joke[] = [];
-jokesSubscription: Subscription;
+  jokes: Observable<any>;
 
-constructor(
+  constructor(
     private localStorage: LocalStorageService,
-    private databaseService: DatabaseService) { }
+    private databaseService: DatabaseService
+  ) {}
 
-removeFromFavorites(index){
-  this.localStorage.deleteJoke(index)
-};
+  removeFromFavorites(joke: Joke) {
+    this.databaseService.removeJoke(joke);
+  }
 
   ngOnInit(): void {
-    // this.localStorage.getJokes().subscribe((jokeArray)=>{
-    //   this.favoriteJokes = jokeArray;
-    // })
-   this.jokesSubscription =  this.databaseService.jokes.subscribe(data => {
-      for (let key in data){
-        this.favoriteJokes.push(data[key])
-      }})
+    this.jokes = this.databaseService.jokes
   }
 
-  ngOnDestroy(){
-    this.jokesSubscription.unsubscribe()
+  ngOnDestroy() {
   }
-
 }

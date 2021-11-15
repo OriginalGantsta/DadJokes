@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { redirectLoggedInTo } from '@angular/fire/compat/auth-guard';
 import { AppComponent } from './app.component';
 import { JokeSidebarComponent } from './joke-sidebar/joke-sidebar.component';
 import { JokeMainComponent } from './joke-main/joke-main.component';
@@ -14,10 +14,18 @@ import { FormsModule } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/compat/auth-guard';
+import { NullComponent } from './null/null.component';
+
+
+
+const redirectUnauthorizedToRoot = () => redirectUnauthorizedTo(['']);
+const redirectLoggedInToHome = ()=> redirectLoggedInTo(['home']);
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: NullComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToHome}},
+  {path: 'home', component: HomeComponent, canActivate: [AngularFireAuthGuard],  data: { authGuardPipe: redirectUnauthorizedToRoot }},
   {path: 'sign-in', component: SignInComponent},
   {path: 'sign-up', component: SignUpComponent}
 ]
@@ -28,6 +36,7 @@ const appRoutes: Routes = [
     HomeComponent,
     JokeSidebarComponent,
     JokeMainComponent,
+    NullComponent,
     HeaderComponent,
     SignUpComponent,
     SignInComponent
@@ -41,7 +50,9 @@ const appRoutes: Routes = [
     AngularFireAuthModule,
     AngularFirestoreModule,
   ],
-  providers: [],
+  providers: [AngularFireAuthGuard],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
+

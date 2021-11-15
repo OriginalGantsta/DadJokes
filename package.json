@@ -19,6 +19,8 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@fontsource/mochiy-pop-one": "^4.5.0",
+    "@fontsource/open-sans": "^4.5.2",
     "bootstrap": "^3.4.1",
     "firebase": "^9.4.0",
     "rxfire": "^6.0.0",

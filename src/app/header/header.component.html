@@ -1,6 +1,77 @@
-<div style="display: flex; align-items: center;">
-  <h2 style="cursor: pointer" [routerLink]="['']">Home</h2>
-  <button style="margin-left: auto;" [routerLink]="['/sign-in']">Sign In</button>
-  <button style="margin-right: 2em" [routerLink]="['/sign-up']">Sign Up</button>
+<div>
+  <div
+    style="
+      display: flex;
+      align-items: center;
+      overflow: visible;
+      height: 75px;
+      padding-left: 21%;
+      padding-right: 21%;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 29px;
+    "
+  >
+    <h2
+      style="
+        cursor: pointer;
+        background-color: #fb8c0f;
+        color: white;
+        font-size: 5em;
+        margin-top: 3px;
+        padding: 7px;
+        align-self: start;
+      "
+      class="test"
+      [routerLink]="['']"
+    >
+      ICFDJ
+    </h2>
+    <div
+      style="margin-right: 1em; margin-left: auto"
+      *ngIf="user && user.uid === null"
+    >
+      <button
+        class="btn"
+        style="
+          margin-top: 14.5px;
+          background-color: white;
+          border-color: #fb8c0f;
+          color: #fb8c0f;
+          margin-right: 0.5em;
+          border-radius: 0px;
+        "
+        [routerLink]="['/sign-in']"
+      >
+        Sign In
+      </button>
+      <button
+        style="
+          background-color: white;
+          border-color: #fb8c0f;
+          color: #fb8c0f;
+          margin-top: 14.5px;
+          border-radius: 0px;
+        "
+        class="btn btn-primary"
+        [routerLink]="['/sign-up']"
+      >
+        Sign Up
+      </button>
+    </div>
+    <div *ngIf="user != undefined && user != null &&user.uid != undefined && user.uid != null" style="margin-top: 29px; margin-right: 1em; margin-left: auto; display: flex; align-items:center;">
+      <p style="font-family: 'mochiy pop one'; margin-right: 1em; margin-bottom: 0;">Welcome,  {{ user.firstName }}</p>
+      <button
+        style="
+          background-color: white;
+          border-color: #fb8c0f;
+          color: #fb8c0f;
+          border-radius: 0px;
+        "
+        class="btn btn-primary"
+        (click)="signOut()"
+      >
+        Sign Out
+      </button>
+    </div>
+  </div>
 </div>
-<hr>

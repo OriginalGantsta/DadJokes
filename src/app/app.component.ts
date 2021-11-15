@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { Observable } from 'rxjs';
-import { DatabaseService } from './database.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,15 +10,13 @@ import { DatabaseService } from './database.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
- constructor(private database: AngularFireDatabase, private databaseService: DatabaseService){
-    database.object('hello/itsme').update({'foo':'bar'});
-  }
-
-  onTestButton(){
-    this.database.object('users/' + this.databaseService.user.uid + '/data' + '/favoriteJokes/').update({'foo':'bar'});
+ loggedIn: BehaviorSubject<boolean>;
+  constructor(private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router, private angularFireAuth: AngularFireAuth){
+    this.loggedIn = authService.loggedIn
   }
 
   ngOnInit(){
   }
+
   title = 'dadJokes';
 }

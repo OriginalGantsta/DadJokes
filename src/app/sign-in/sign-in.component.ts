@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { UserSignIn } from '../Model/userSignin.model';
 
@@ -15,7 +16,7 @@ export class SignInComponent implements OnInit {
     this.authService.signIn(loginUser.email, loginUser.password)
   }
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }

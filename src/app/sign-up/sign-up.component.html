@@ -1,7 +1,65 @@
-<form (ngSubmit)="onSubmit(form)" #form = "ngForm">
-  <input type="text" name="first name" ngModel required>
-  <input type="text" name="last name" ngModel required>
-  <input type="email" name="email" ngModel required email>
-  <input name="password" type="password" ngModel required>
-  <button type="submit">'Submit</button>
-</form>
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  "
+>
+  <h2>Sign Un</h2>
+  <form
+    (ngSubmit)="onSubmit(form)"
+    #form="ngForm"
+    style="display: flex; flex-direction: column"
+  >
+    <label for="first name" style="font-size: 1.5em">First Name</label>
+    <input
+      type="text"
+      name="first name"
+      ngModel
+      required
+      style="width: 25%; min-width: 18em"
+    />
+    <label for="last name" style="margin-top: 1em; font-size: 1.5em"
+      >Last Name</label
+    >
+    <input
+      type="text"
+      name="last name"
+      ngModel
+      required
+      style="width: 25%; min-width: 18em"
+    />
+    <label for="email" style="margin-top: 1em; font-size: 1.5em">Email</label>
+    <input
+      type="email"
+      name="email"
+      ngModel
+      required
+      email
+      style="width: 25%; min-width: 18em"
+    />
+    <label for="password" style="margin-top: 1em; font-size: 1.5em"
+      >Password</label
+    >
+    <input
+      name="password"
+      type="password"
+      ngModel
+      required
+      style="width: 25%; min-width: 18em"
+    />
+    <button
+      type="submit"
+      class="btn btn-primary"
+      style="width: 5%; min-width: 8em; margin-top: 2em; align-self: center"
+    >
+      Submit
+    </button>
+  </form>
+</div>

@@ -1,4 +1,4 @@
-<div *ngFor="let joke of favoriteJokes, let i = index">
-  <p style= "margin-bottom: .25em;">{{joke.joke}}</p>
-  <button class="btn btn-primary" (click)="removeFromFavorites(i)" >Remove from favorites</button>
+<div *ngFor="let joke of jokes | async">
+  <p style= "margin-bottom: .25em; color: #3b3b3b; font-family: 'mochiy pop one'; margin-top: 1.5em;">{{joke.joke}}</p>
+  <button class="btn btn-primary" (click)="removeFromFavorites(joke)" >Remove from favorites</button>
 </div>

@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+button {
+  background-color: white !important;
+  border-color: #fb8c0f !important;
+  color: #fb8c0f !important;
+  border-radius: 0px !important;
+}
+
+button:focus{
+  outline: white !important;
+}
+
+h1, h2 {
+  font-family: 'mochiy pop one' !important;
+}
