@@ -1,0 +1,13 @@
+.mainJokeContainer {
+  margin-right: auto;
+display: flex;
+justify-content: start;
+}
+
+.jokeOutput{
+  margin-bottom: .25em; font-family: 'mochiy pop one'; color: #3b3b3b; margin-top: 1em;
+}
+
+.userResponse{
+  font-family: 'mochiy pop one'; color: #6e6e6e; font-size: .75em;
+}

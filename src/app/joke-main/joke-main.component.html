@@ -1,21 +1,16 @@
-<div style="
-margin-right: auto;
-display: flex;
-justify-content: start;
-">
-<button  style="margin-right: 1em;" class="btn btn-primary" (click)="onToggleSidebar()">Favorites</button>
-<button class="btn btn-primary" (click)="getJoke()">Get Joke</button>
+<div class="mainJokeContainer">
+  <button style="margin-right: .5em;" class="btn btn-primary" (click)="onToggleSidebar()">Favorites</button>
+  <button class="btn btn-primary" (click)="getJoke()">Get Joke</button>
 </div>
 <div *ngIf="joke">
-  <p style="margin-bottom: .25em; font-family: 'mochiy pop one'; color: #3b3b3b; margin-top: 1em;">
-  {{ joke.joke }}
+  <p class="jokeOutput">
+    {{ joke.joke }}
   </p>
-  <button class="btn btn-primary" style="margin-top: 0;" (click)="favoriteJoke()">
+  <button class="btn btn-primary" (click)="favoriteJoke()">
     Add to favorites
   </button>
-  <div *ngIf="jokeAdded" style="margin-top: .25em;">
-    <p style="font-family: 'mochiy pop one'; color: #6e6e6e; font-size: .75em;"> Joke added to favorites!
-    </p>
-    </div>
-  <div *ngIf="alreadyAdded" >Already Added</div>
+  <div>
+    <p *ngIf="jokeAdded" style="margin-top: .25em;" class="userResponse"> Joke added to favorites!</p>
+    <p *ngIf="alreadyAdded" class="userResponse" style="margin-top: .25em;">Already added!</p>
+  </div>
 </div>

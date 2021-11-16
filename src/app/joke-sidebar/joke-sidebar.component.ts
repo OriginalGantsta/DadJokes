@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable} from 'rxjs';
 import { DatabaseService } from '../database.service';
-import { LocalStorageService } from '../local-storage.service';
 import { Joke } from '../Model/joke.model';
 
 @Component({
@@ -13,7 +12,6 @@ export class JokeSidebarComponent implements OnInit, OnDestroy {
   jokes: Observable<any>;
 
   constructor(
-    private localStorage: LocalStorageService,
     private databaseService: DatabaseService
   ) {}
 

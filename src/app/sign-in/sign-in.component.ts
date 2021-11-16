@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { UserSignIn } from '../Model/userSignin.model';
 
@@ -12,11 +11,11 @@ import { UserSignIn } from '../Model/userSignin.model';
 export class SignInComponent implements OnInit {
 
   onSubmit(form: NgForm){
-    var loginUser = new UserSignIn(form)
+    var loginUser = new UserSignIn(form);
     this.authService.signIn(loginUser.email, loginUser.password)
   }
 
-  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }

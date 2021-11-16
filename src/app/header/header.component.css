@@ -1,4 +1,40 @@
 .test {
+  font-family: "Mochiy Pop One";
+}
 
-  font-family: "Mochiy Pop One"
+.headerParentContainer {
+  display: flex;
+  align-items: center;
+  overflow: visible;
+  height: 75px;
+  padding-left: 21%;
+  padding-right: 21%;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 29px;
+}
+
+.headerLogo {
+  cursor: pointer;
+  background-color: #fb8c0f;
+  color: white;
+  font-size: 5em;
+  margin-top: 3px;
+  padding: 7px;
+  align-self: start;
+  font-family: Mochiy Pop One;
+}
+
+.buttonContainer {
+  margin-right: 1em;
+  margin-left: auto;
+  padding-top: 29px;
+  align-items: center;
+  display: flex;
+}
+
+
+.userMessage {
+  font-family: mochiy pop one;
+  margin-right: 1em;
+  margin-bottom: 0;
 }

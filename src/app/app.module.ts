@@ -16,7 +16,6 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/compat/auth-guard';
-import { NullComponent } from './null/null.component';
 
 
 
@@ -24,10 +23,11 @@ const redirectUnauthorizedToRoot = () => redirectUnauthorizedTo(['']);
 const redirectLoggedInToHome = ()=> redirectLoggedInTo(['home']);
 
 const appRoutes: Routes = [
-  {path: '', component: NullComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToHome}},
+  {path: '', children: [], canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToHome}},
   {path: 'home', component: HomeComponent, canActivate: [AngularFireAuthGuard],  data: { authGuardPipe: redirectUnauthorizedToRoot }},
-  {path: 'sign-in', component: SignInComponent},
-  {path: 'sign-up', component: SignUpComponent}
+  {path: 'sign-in', component: SignInComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToHome}},
+  {path: 'sign-up', component: SignUpComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToHome}},
+  {path: '**', redirectTo: ''}
 ]
 
 @NgModule({
@@ -36,7 +36,6 @@ const appRoutes: Routes = [
     HomeComponent,
     JokeSidebarComponent,
     JokeMainComponent,
-    NullComponent,
     HeaderComponent,
     SignUpComponent,
     SignInComponent

@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { DatabaseService } from '../database.service';
 import { JokeAPIService } from '../joke-api.service';
@@ -10,16 +11,12 @@ import { Joke } from '../Model/joke.model';
   templateUrl: './joke-main.component.html',
   styleUrls: ['./joke-main.component.css'],
 })
-export class JokeMainComponent implements OnInit, OnDestroy {
+export class JokeMainComponent implements OnDestroy {
   joke: Joke = null;
   alreadyAdded: boolean = false;
-
-  ngOnInit() {}
-
   jokeAdded: boolean = false;
   jokes: Joke[];
-  jokesSubscription;
-  Subscription;
+  jokesSubscription: Subscription;
 
   constructor(
     private jokeAPI: JokeAPIService,
@@ -27,10 +24,7 @@ export class JokeMainComponent implements OnInit, OnDestroy {
     private databaseService: DatabaseService
   ) {
     this.jokesSubscription = this.databaseService.jokes.subscribe((jokes) => {
-      console.log('subscription fired');
       if (this.jokes != null && this.jokes != undefined) {
-        console.log(jokes.length);
-        console.log(this.jokes.length);
         if (jokes.length > this.jokes.length) {
           this.jokeAdded = true;
           this.alreadyAdded = false;
@@ -57,13 +51,9 @@ export class JokeMainComponent implements OnInit, OnDestroy {
   }
 
   favoriteJoke() {
-    console.log(this.joke.id);
-    console.log(this.jokes);
     var notFavorited = true;
     outerLoop: for (var joke in this.jokes) {
-      console.log(this.jokes[joke].id);
       if (this.jokes[joke].id === this.joke.id) {
-        console.log('already added formula working');
         notFavorited = false;
         this.alreadyAdded = true;
         this.jokeAdded = false;

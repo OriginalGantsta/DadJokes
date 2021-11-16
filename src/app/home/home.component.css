@@ -1,4 +1,18 @@
-.flex {
+.homeContainer {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
+  width: 100%
+}
+
+.sidebarContainer {
+  overflow: hidden;
+  background-color: white;
+  border-right: 1px solid black;
+}
+
+.sidebar {
+  position: relative;
+  width: 24vw;
+  display: flex;
+  float: left
 }

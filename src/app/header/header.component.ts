@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { DatabaseService } from '../database.service';
@@ -10,7 +10,7 @@ import { User } from '../Model/user.model';
   styleUrls: ['./header.component.css'],
 })
 
-export class HeaderComponent implements OnInit, OnDestroy{
+export class HeaderComponent implements OnDestroy {
   signedIn: BehaviorSubject<boolean>;
   userSubscription: Subscription;
   user: User = undefined;
@@ -19,16 +19,15 @@ export class HeaderComponent implements OnInit, OnDestroy{
     private databaseService: DatabaseService,
 
   ) {
-    this.userSubscription = this.databaseService.user.subscribe((authUser) => {this.user = authUser} )
+    this.userSubscription = this.databaseService.user.subscribe((authUser) => { this.user = authUser })
 
   }
-
-  ngOnInit(): void {}
 
   signOut() {
     this.authService.logout()
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe()
   }
 }

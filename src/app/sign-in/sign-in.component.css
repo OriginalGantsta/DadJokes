@@ -1,0 +1,37 @@
+.signInContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+h2 {
+  font-family: mochiy pop one;
+}
+
+.signInForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.formInput {
+  width: 25%;
+  min-width: 18em;
+}
+
+.formInputLabel {
+  font-size: 1.5em;
+  margin-top: 1em;
+}
+
+.submitButton {
+  width: 5%;
+  min-width: 8em;
+  margin-top: 2em;
+  align-self: center;
+}
