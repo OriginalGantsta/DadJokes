@@ -4,3 +4,25 @@
   font-family: "mochiy pop one";
   margin-top: 1.5em;
 }
+
+.undoMessage {
+  font-size: 0.75em;
+  font-family: "Mochiy Pop One";
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.undoButton {
+  font-size: 0.6em;
+  margin-left: 0.5em;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.undoContainer {
+  display: flex;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}

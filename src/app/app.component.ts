@@ -1,22 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent {
  loggedIn: BehaviorSubject<boolean>;
-  constructor(private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router, private angularFireAuth: AngularFireAuth){
+  constructor(authService: AuthService,){
     this.loggedIn = authService.loggedIn
   }
 
-  ngOnInit(){
-  }
 
   title = 'dadJokes';
 }

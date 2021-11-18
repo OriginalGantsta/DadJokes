@@ -1,13 +1,32 @@
 <div class="signInContainer">
   <h2>Sign In</h2>
-  <form class="signInForm" (ngSubmit)="onSubmit(signInForm)" #signInForm="ngForm">
+
+  <form
+    class="signInForm"
+    (ngSubmit)="onSubmit(signInForm)"
+    #signInForm="ngForm"
+  >
 
     <label for="email" class="formInputLabel">Email</label>
-    <input type="email" name="email" ngModel required email class="formInput">
+    <input type="email" name="email" ngModel required email class="formInput" [ngClass]="invalidSignIn ? 'invalid' : ''"/>
+<div *ngIf="invalidSignIn">
+      <p>
+        Email or password was not correct!
+      </p>
+    </div>
+    <label for="password" class="formInputLabel" style="margin-top: 1em"
+      >Password</label
+    >
+    <input
+      #passwordInput
+      name="password"
+      type="password"
+      ngModel
+      required
+      class="formInput"
+      [ngClass]="invalidSignIn ? 'invalid' : ''"
+    />
 
-    <label for="password" class="formInputLabel" style="margin-top: 1em;">Password</label>
-    <input name="password" type="password" ngModel required class="formInput" />
-
-    <button type="submit" class="btn btn-primary" class="submitButton">Submit</button>
+    <button type="submit" class="btn btn-primary submitButton">Submit</button>
   </form>
 </div>

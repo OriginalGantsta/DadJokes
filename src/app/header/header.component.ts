@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { AuthService } from '../auth.service';
-import { DatabaseService } from '../database.service';
+import { AuthService } from '../services/auth.service';
+import { DatabaseService } from '../services/database.service';
 import { User } from '../Model/user.model';
 
 @Component({

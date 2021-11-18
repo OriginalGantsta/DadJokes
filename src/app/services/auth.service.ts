@@ -3,13 +3,15 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { DatabaseService } from './database.service';
-import { UserSignup } from './Model/userSignUp.model';
+import { UserSignup } from '../Model/userSignUp.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService implements OnInit {
   loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(undefined);
+
+
 
   constructor(
     private angularFireAuth: AngularFireAuth,
@@ -19,10 +21,11 @@ export class AuthService implements OnInit {
     this.angularFireAuth.onAuthStateChanged((authUser) => {
       if (authUser != null) {
         this.loggedIn.next(true);
-        this.databaseService.onLoggedIn(authUser)
+        this.databaseService.onLoggedIn(authUser);
       } else {
         this.loggedIn.next(false);
-        this.databaseService.onLoggedOut()}
+        this.databaseService.onLoggedOut();
+      }
     });
   }
 
@@ -31,12 +34,9 @@ export class AuthService implements OnInit {
   signUp(userSignup: UserSignup) {
     return this.angularFireAuth
       .createUserWithEmailAndPassword(userSignup.email, userSignup.password)
-      .then((result) => {
+      .then(() => {
         this.databaseService.writeUserData(userSignup);
         this.router.navigate(['/home']);
-      })
-      .catch((error) => {
-        window.alert(error.message);
       });
   }
 
@@ -46,9 +46,6 @@ export class AuthService implements OnInit {
       .then(() => {
         this.router.navigate(['/home']);
       })
-      .catch((error) => {
-        window.alert(error.message);
-      });
   }
 
   logout() {

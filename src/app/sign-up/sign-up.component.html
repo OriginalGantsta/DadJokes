@@ -2,18 +2,20 @@
   <h2>Sign Up</h2>
   <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="signUpForm">
     <label for="first name" class="formInputLabel">First Name</label>
-    <input type="text" name="first name" ngModel required class="formInput" autocomplete="given-name"/>
+    <input type="text" name="first name" ngModel required class="formInput" autocomplete="given-name" />
 
-    <label for="last name"  class="formInputLabel">Last Name</label>
+    <label for="last name" class="formInputLabel">Last Name</label>
     <input type="text" name="last name" ngModel required class="formInput" autocomplete="family-name" />
 
     <label for="email" class="formInputLabel">Email</label>
-    <input type="email" name="email" ngModel required email class="formInput" autocomplete="email" />
+    <input #emailInput type="email" name="email" ngModel required email class="formInput" autocomplete="email" style="overflow: visible;" [ngClass]="emailInUse ? 'ng-invalid' : ''"/>
+    <div *ngIf="emailInUse" ><p  style="position: fixed; font-size: .8em;">An account with this email already exists!</p></div>
 
-    <label for="password" class="formInputLabel" >Password</label>
-    <input name="password" type="password" ngModel required class="formInput" autocomplete = "new-password" />
+    <label for="password" class="formInputLabel">Password</label>
+    <input  #passwordInput name="password" type="password" ngModel required class="formInput" autocomplete="new-password"  [ngClass]="invalidPassword ? 'ng-invalid' : ''"/>
+    <div *ngIf="invalidPassword" ><p>Password needs to be at least 6 characters!</p></div>
 
-    <button type="submit" class="btn btn-primary" class="submitButton">
+    <button type="submit" class="btn btn-primary submitButton" [disabled]="!form.valid">
       Submit
     </button>
   </form>

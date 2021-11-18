@@ -29,9 +29,19 @@ h2 {
   margin-top: 1em;
 }
 
+.formInput.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
 .submitButton {
-  width: 5%;
   min-width: 8em;
   margin-top: 2em;
   align-self: center;
 }
+
+p {
+  color: red;
+  position: fixed;
+  font-size: 0.8em;
+}
+

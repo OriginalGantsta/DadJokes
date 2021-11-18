@@ -1,4 +1,28 @@
-<div *ngFor="let joke of jokes | async">
-  <p class="jokeOutput">{{joke.joke}}</p>
-  <button class="btn btn-primary" (click)="removeFromFavorites(joke)">Remove from favorites</button>
+<div class="undoContainer" *ngIf="undoIndex === -1">
+  <p class="undoMessage">Joke removed!</p>
+  <button (click)="undoRemoveFromFavorites()" class="btn btn-primary" class="undoButton">
+    Undo
+  </button>
+</div>
+
+<div *ngFor="let joke of jokes | async; let i = index">
+
+  <div class="undoContainer" style="margin-top: 1.5em;" *ngIf="undoIndex === i && undoLocation === 'above'">
+    <p class="undoMessage">Joke removed!</p>
+    <button (click)="undoRemoveFromFavorites()" class="btn btn-primary" class="undoButton">
+      Undo
+    </button>
+  </div>
+
+  <p class="jokeOutput">{{ joke.joke }}</p>
+  <button class="btn btn-primary" (click)="removeFromFavorites(joke, i)">
+    Remove from favorites
+  </button>
+
+  <div class="undoContainer" *ngIf="undoIndex === i && undoLocation === 'below'">
+    <p class="undoMessage">Joke removed!</p>
+    <button (click)="undoRemoveFromFavorites()" class="btn btn-primary" class="undoButton">
+      Undo
+    </button>
+  </div>
 </div>

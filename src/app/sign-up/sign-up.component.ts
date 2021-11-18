@@ -1,24 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import { UserSignup } from '../Model/userSignUp.model';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  styleUrls: ['./sign-up.component.css'],
 })
 export class SignUpComponent implements OnInit {
-userSignup = new UserSignup (null,null,null,null)
+  userSignup = new UserSignup(null, null, null, null);
+  emailInUse: boolean = false;
+  invalidPassword: boolean = false;
 
-  onSubmit(form: NgForm){
+@ViewChild('emailInput') emailInput: ElementRef;
+@ViewChild('passwordInput') passwordInput: ElementRef;
+
+  async onSubmit(form: NgForm) {
     this.userSignup.userForm = form;
-    this.authService.signUp(this.userSignup)
+    this.emailInUse = false;
+    this.invalidPassword = false;
+    await this.authService.signUp(this.userSignup).catch((error) => {
+      console.log(error.code)
+      if (error.code === 'auth/email-already-in-use') {
+        this.emailInUse = true;
+        this.emailInput.nativeElement.focus();
+
+      }
+      else if (error.code === 'auth/weak-password') {
+        this.invalidPassword = true;
+        this.passwordInput.nativeElement.focus();
+      }
+    });
   }
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private el: ElementRef) {
+  }
 
   ngOnInit(): void {
-  }
 
+  }
 }

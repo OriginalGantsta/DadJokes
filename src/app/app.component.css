@@ -1,0 +1,21 @@
+.mainJokeContainer {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: 56%;
+  justify-content: start;
+}
+
+h1 {
+  font-family: Mochiy Pop One;
+  color: #3b3b3b;
+}
+
+h4 {
+  font-family: sans-serif;
+  color: #6e6e6e;
+}
+
+span {
+  cursor: pointer;
+}

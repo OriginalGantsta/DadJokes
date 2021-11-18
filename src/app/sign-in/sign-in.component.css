@@ -35,3 +35,20 @@ h2 {
   margin-top: 2em;
   align-self: center;
 }
+
+.formInput.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+p {
+  color: red;
+  width: 18em;
+  position: fixed;
+  margin-top: .8em;
+  font-size: 0.8em;
+  line-height: .75;
+}
+
+.invalid.ng-pristine {
+  border: 1px solid red;
+}

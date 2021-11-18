@@ -3,9 +3,9 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { Joke } from './Model/joke.model';
-import { User } from './Model/user.model';
-import { UserSignup } from './Model/userSignUp.model';
+import { Joke } from '../Model/joke.model';
+import { User } from '../Model/user.model';
+import { UserSignup } from '../Model/userSignUp.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,9 @@ import { UserSignup } from './Model/userSignUp.model';
 export class DatabaseService implements OnInit {
   private jokeSubscription: Subscription;
   private userSubscription: Subscription;
+  jokes: BehaviorSubject<Joke[]> = new BehaviorSubject<Joke[]>(null);
   user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  removedJoke: Joke;
 
   constructor(
     private angularFireAuth: AngularFireAuth,
@@ -54,8 +56,6 @@ export class DatabaseService implements OnInit {
 
   ngOnInit() {}
 
-  jokes: BehaviorSubject<Joke[]> = new BehaviorSubject<Joke[]>(null);
-
   async writeUserData(userSignup: UserSignup) {
     await this.angularFireAuth.user.pipe(take(1)).subscribe((authUser) => {
       this.user.next({
@@ -71,19 +71,11 @@ export class DatabaseService implements OnInit {
   }
 
   async saveFavoriteJoke(joke: Joke) {
-    // if (this.jokes.value.length > 0) {
-    //   for (let key in this.jokes.value) {
-    //     if (this.jokes.value[key].id === joke.id) {
-    //       console.log('already added to favorites');
-    //       break;
-    //     } else console.log('joke set 1 else'); this.setJoke(joke);
-    //   }
-    // } else console.log('joke set 2 else');
     this.setJoke(joke);
   }
 
   private setJoke(joke: Joke) {
-    console.log('joke setting')
+    console.log('joke setting');
     this.database
       .object(
         'users/' + this.user.value.uid + '/data' + '/favoriteJokes/' + joke.id
@@ -92,6 +84,7 @@ export class DatabaseService implements OnInit {
   }
 
   removeJoke(joke: Joke) {
+    this.removedJoke = joke;
     this.database
       .object(
         'users/' + this.user.value.uid + '/data' + '/favoriteJokes/' + joke.id

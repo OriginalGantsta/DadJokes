@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { DatabaseService } from '../database.service';
-import { JokeAPIService } from '../joke-api.service';
+import { DatabaseService } from '../services/database.service';
+import { JokeAPIService } from '../services/joke-api.service';
 import { SidebarToggleService } from '../joke-sidebar/sidebar-toggle.service';
 import { Joke } from '../Model/joke.model';
 
@@ -39,6 +39,7 @@ export class JokeMainComponent implements OnDestroy {
 
   getJoke() {
     this.alreadyAdded = false;
+    this.jokeAdded = false;
     this.jokeAPI
       .fetchJoke()
       .pipe(take(1))
