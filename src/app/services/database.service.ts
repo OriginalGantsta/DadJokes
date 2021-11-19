@@ -23,7 +23,6 @@ export class DatabaseService implements OnInit {
   ) {}
 
   onLoggedIn(authUser) {
-    console.log('logging in');
     this.jokeSubscription = this.database
       .object('users/' + authUser.uid + '/data' + '/favoriteJokes')
       .valueChanges()

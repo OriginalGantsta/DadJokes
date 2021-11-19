@@ -21,7 +21,6 @@ export class SignUpComponent implements OnInit {
     this.emailInUse = false;
     this.invalidPassword = false;
     await this.authService.signUp(this.userSignup).catch((error) => {
-      console.log(error.code)
       if (error.code === 'auth/email-already-in-use') {
         this.emailInUse = true;
         this.emailInput.nativeElement.focus();
