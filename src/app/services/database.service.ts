@@ -74,7 +74,6 @@ export class DatabaseService implements OnInit {
   }
 
   private setJoke(joke: Joke) {
-    console.log('joke setting');
     this.database
       .object(
         'users/' + this.user.value.uid + '/data' + '/favoriteJokes/' + joke.id
