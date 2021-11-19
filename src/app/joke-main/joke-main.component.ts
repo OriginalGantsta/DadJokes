@@ -23,9 +23,16 @@ export class JokeMainComponent implements OnDestroy {
     private sidebarToggleService: SidebarToggleService,
     private databaseService: DatabaseService
   ) {
-    this.jokesSubscription = this.databaseService.jokes.subscribe((jokes) => {
-      if (this.jokes != null && this.jokes != undefined) {
+    this.jokesSubscription = this.databaseService.jokes.subscribe((jokes: Joke[]) => {
+      outerloop: if (this.jokes != null && this.jokes != undefined) {
         if (jokes.length > this.jokes.length) {
+          if (databaseService.removedJoke != undefined){
+          for (let joke of jokes){
+            if (joke.id === databaseService.removedJoke.id){
+              break outerloop
+            }
+            else continue
+          }}
           this.jokeAdded = true;
           this.alreadyAdded = false;
         } else if (jokes.length <= this.jokes.length) {
@@ -36,6 +43,10 @@ export class JokeMainComponent implements OnDestroy {
       this.jokes = jokes;
     });
   }
+
+
+
+
 
   getJoke() {
     this.alreadyAdded = false;
